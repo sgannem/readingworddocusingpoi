@@ -1,5 +1,6 @@
 package com.example.readingworddocusingpoi;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.IBodyElement;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
@@ -13,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+@Slf4j
 public class ReadMsWordDocFile {
 
     public static void main(String[] args) throws IOException {
@@ -25,43 +27,43 @@ public class ReadMsWordDocFile {
                 Files.newInputStream(Paths.get(fileName)))) {
             XWPFWordExtractor xwpfWordExtractor = new XWPFWordExtractor(doc);
             String docText = xwpfWordExtractor.getText();
-//            System.out.println(docText);
+//            log.info(docText);
 //            String docMetaData = xwpfWordExtractor.getExtendedProperties().
             List<IBodyElement> list = doc.getBodyElements();
             for (IBodyElement temp : list) {
                 if (temp instanceof XWPFParagraph) {
                     XWPFParagraph paragraph = (XWPFParagraph) temp;
-//                    System.out.println("#paragraph:"+paragraph);
-//                    System.out.println("firstLineIndent:"+paragraph.getFirstLineIndent());
-//                    System.out.println("Text:"+paragraph.getText());
-//                    System.out.println("alignment value:"+paragraph.getAlignment().getValue());
-//                    System.out.println("runs:"+paragraph.getRuns());
+//                    log.info("#paragraph:"+paragraph);
+//                    log.info("firstLineIndent:"+paragraph.getFirstLineIndent());
+//                    log.info("Text:"+paragraph.getText());
+//                    log.info("alignment value:"+paragraph.getAlignment().getValue());
+//                    log.info("runs:"+paragraph.getRuns());
 
-                    System.out.println("text:" + paragraph.getText());
-                    System.out.println("alignment:" + paragraph.getAlignment());
-                    System.out.println("runs size:" + paragraph.getRuns().size());
-                    System.out.println("================================");
+                    log.info("text:" + paragraph.getText());
+                    log.info("alignment:" + paragraph.getAlignment());
+                    log.info("runs size:" + paragraph.getRuns().size());
+                    log.info("================================");
                     int cnt = 0;
                     for (XWPFRun run1 : paragraph.getRuns()) {
-//                        System.out.println("run.text:" + run1.getText(0));
-                        System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-                        System.out.println("run doc - "+(cnt++));
-                        System.out.println("run.style:" + run1.getStyle());
-                        System.out.println("run.fontName:" + run1.getFontName());
-                        System.out.println("run.isBold:" + run1.isBold());
-                        System.out.println("run.isItalic:" + run1.isItalic());
+//                        log.info("run.text:" + run1.getText(0));
+                        log.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+                        log.info("run doc - "+(cnt++));
+                        log.info("run.style:" + run1.getStyle());
+                        log.info("run.fontName:" + run1.getFontName());
+                        log.info("run.isBold:" + run1.isBold());
+                        log.info("run.isItalic:" + run1.isItalic());
                     }
-                    System.out.println("================================");
-                    System.out.println("style:" + paragraph.getStyle());
+                    log.info("================================");
+                    log.info("style:" + paragraph.getStyle());
                     // Returns numbering format for this paragraph, eg bullet or lowerLetter.
-                    System.out.println("numFmt:" + paragraph.getNumFmt());
-                    System.out.println("alignment:" + paragraph.getAlignment());
-                    System.out.println("isWorldWrapped:" + paragraph.isWordWrapped());
-                    System.out.println("--------------------");
+                    log.info("numFmt:" + paragraph.getNumFmt());
+                    log.info("alignment:" + paragraph.getAlignment());
+                    log.info("isWorldWrapped:" + paragraph.isWordWrapped());
+                    log.info("--------------------");
                 } else if (temp instanceof XWPFTable) {
                     XWPFTable table = (XWPFTable) temp;
                     for (XWPFTableRow row : table.getRows()) {
-                        System.out.println("row:" + row);
+                        log.info("row:" + row);
                     }
                 }
             }

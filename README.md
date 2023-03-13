@@ -11,18 +11,18 @@ XWPFDocument xdoc = new XWPFDocument(OPCPackage.open(fis));
 List paragraphList = xdoc.getParagraphs();
 // reading each paragraph
 for (XWPFParagraph paragraph : paragraphList) {
-	System.out.println(paragraph.getText());
-	System.out.println(paragraph.getAlignment());
+	log.info(paragraph.getText());
+	log.info(paragraph.getAlignment());
 	System.out.print(paragraph.getRuns().size());
-	System.out.println(paragraph.getStyle());
+	log.info(paragraph.getStyle());
 
 	// Returns numbering format for this paragraph, eg bullet or lowerLetter.
-	System.out.println(paragraph.getNumFmt());
-	System.out.println(paragraph.getAlignment());
+	log.info(paragraph.getNumFmt());
+	log.info(paragraph.getAlignment());
 
-	System.out.println(paragraph.isWordWrapped());
+	log.info(paragraph.isWordWrapped());
 
-	System.out.println("********************************************************************");
+	log.info("********************************************************************");
 }
 ````
 
@@ -35,7 +35,7 @@ for (XWPFParagraph paragraph : paragraphList) {
 git clone <project-git-hub-url>
 cd <cloned-project>
 mvn clean install
-java -jar target/readingworddocusingpoi-0.0.1-SNAPSHOT.jar
+java -Dlog4j2.contextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector -jar target/readingworddocusingpoi-0.0.1-SNAPSHOT.jar
 ```
 #### sample output
 ```
